@@ -13,7 +13,7 @@ public class Result {
     @SerializedName("events")
     private Events mEvents;
     @SerializedName("id")
-    private Long mId;
+    private String mId;
     @SerializedName("modified")
     private String mModified;
     @SerializedName("name")
@@ -53,11 +53,11 @@ public class Result {
         mEvents = events;
     }
 
-    public Long getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         mId = id;
     }
 

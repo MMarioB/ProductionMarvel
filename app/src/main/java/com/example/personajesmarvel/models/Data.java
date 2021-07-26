@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class Data {
 
     @SerializedName("count")
-    private Long mCount;
+    private String mCount;
     @SerializedName("limit")
     private Long mLimit;
     @SerializedName("offset")
@@ -17,11 +17,11 @@ public class Data {
     @SerializedName("total")
     private Long mTotal;
 
-    public Long getCount() {
+    public String getCount() {
         return mCount;
     }
 
-    public void setCount(Long count) {
+    public void setCount(String count) {
         mCount = count;
     }
 
