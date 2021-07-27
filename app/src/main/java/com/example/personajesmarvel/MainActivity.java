@@ -97,13 +97,14 @@ public class MainActivity extends AppCompatActivity {
                                 listado.add(p);
 
                                 System.out.println(url);
+                                System.out.println(i + "----" + descrip.length());
 
                             }
 
 
                             if (listado.size() != 0) {
                                 adapter = new RecyclerViewAdapter(activity);
-                                llm = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
+                                llm = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
                                 rvLista.setLayoutManager(llm);
                                 rvLista.setAdapter(adapter);
 

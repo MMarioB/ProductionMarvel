@@ -73,7 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @NonNull
     private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater){
         RecyclerView.ViewHolder viewHolder;
-        View view = inflater.inflate(R.layout.personaje_card_view, parent, false);
+        View view = inflater.inflate(R.layout.card_view_horizontal, parent, false);
         viewHolder = new loadVH(view);
         return viewHolder;
     }
@@ -107,6 +107,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             .load(p.getUrl())
                             .apply(RequestOptions.centerCropTransform())
                             .into(loadVH.imghero);
+
+                    //Card Animation
+                    // holder.card.animation = AnimationUtils.loadAnimation(context,R.anim.card_fade)
 
                 }
 
@@ -190,11 +193,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public loadVH(View view) {
             super(view);
 
-            tName = itemView.findViewById(R.id.nombre_personaje);
-            tId = itemView.findViewById(R.id.idPersonaje);
-            tUrl = itemView.findViewById(R.id.urlPersonaje);
-            tDescrip = itemView.findViewById(R.id.descripcionPersonaje);
-            imghero = itemView.findViewById(R.id.personaje_imagen);
+            tName = itemView.findViewById(R.id.heroe_name);
+            tId = itemView.findViewById(R.id.heroe_id);
+            tUrl = itemView.findViewById(R.id.heroe_url);
+            tDescrip = itemView.findViewById(R.id.heroe_description);
+            imghero = itemView.findViewById(R.id.heroe_image);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
