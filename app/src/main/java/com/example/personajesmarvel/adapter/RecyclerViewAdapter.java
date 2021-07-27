@@ -1,8 +1,6 @@
 package com.example.personajesmarvel.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.personajesmarvel.R;
-import com.example.personajesmarvel.models.Characters;
 import com.example.personajesmarvel.models.Personaje;
 import com.example.personajesmarvel.models.Result;
-import com.example.personajesmarvel.service.MarvelInterfaceAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 viewHolder = getViewHolder(parent, inflater);
                 break;
             case LOADING:
-                View view2 = inflater.inflate(R.layout.load_progress, parent, false);
+                View view2 = inflater.inflate(R.layout.refresh, parent, false);
                 viewHolder = new cargarVH(view2);
                 break;
         }
