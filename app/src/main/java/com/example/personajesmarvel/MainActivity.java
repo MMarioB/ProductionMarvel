@@ -19,8 +19,10 @@ import com.example.personajesmarvel.adapter.RecyclerViewAdapter;
 import com.example.personajesmarvel.env.Keys;
 import com.example.personajesmarvel.models.Characters;
 import com.example.personajesmarvel.models.Personaje;
+import com.example.personajesmarvel.models.Result;
 import com.example.personajesmarvel.service.MarvelInterfaceAPI;
 import com.example.personajesmarvel.service.Middleware;
+import com.example.personajesmarvel.service.PaginationScrollListener;
 import com.example.personajesmarvel.service.RetrofitInstance;
 
 import java.io.IOError;
@@ -41,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
     private Middleware middleware;
     private long inicio = 0;
 
-    PersonajesAdapter adapter;
+    private static final int PAGE_START = 0;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int TOTAL_PAGES = 0;
+    private int PAGE_SIZE = 10;
+    private int currentPage = PAGE_START;
+
+    RecyclerViewAdapter adapter;
     LinearLayoutManager llm;
     List<Personaje> listado;
     Activity activity;
@@ -63,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void traerDatos(final View view) {
-        try{
+        try {
             RetrofitInstance
                     .listaPersonajes()
                     .create(MarvelInterfaceAPI.class)
-                    .lista(middleware.timestamp(),inicio, Keys.PUBLIC_KEY, middleware.md5())
+                    .lista(middleware.timestamp(), inicio, Keys.PUBLIC_KEY, middleware.md5())
                     .enqueue(new Callback<Characters>() {
                         @Override
                         public void onResponse(Call<Characters> call, Response<Characters> response) {
@@ -93,10 +102,37 @@ public class MainActivity extends AppCompatActivity {
 
 
                             if (listado.size() != 0) {
-                                adapter = new PersonajesAdapter(activity,listado);
+                                adapter = new RecyclerViewAdapter(activity);
                                 llm = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
                                 rvLista.setLayoutManager(llm);
                                 rvLista.setAdapter(adapter);
+
+                                rvLista.addOnScrollListener(new PaginationScrollListener(llm) {
+                                    @Override
+                                    protected void loadMoreItems() {
+                                        isLoading = true;
+                                        currentPage += 1;
+                                        inicio += 20;
+                                        cargarDatos(view, currentPage);
+                                    }
+
+                                    @Override
+                                    public int getTotalPageCount() {
+                                        return TOTAL_PAGES;
+                                    }
+
+                                    @Override
+                                    public boolean isLastPage() {
+                                        return isLastPage;
+                                    }
+
+                                    @Override
+                                    public boolean isLoading() {
+                                        return isLoading;
+                                    }
+                                });
+
+                                cargarDatos(view, currentPage);
 
 
                             } else {
@@ -109,9 +145,62 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                         }
                     });
-        } catch (IOError e){
+        } catch (IOError e) {
             e.printStackTrace();
             Toast.makeText(activity, "ERROR", Toast.LENGTH_SHORT).show();
         }
     }
+
+   private void cargarDatos(View view, final int page) {
+
+        try {
+            RetrofitInstance
+                    .listaPersonajes()
+                    .create(MarvelInterfaceAPI.class)
+                    .lista(middleware.timestamp(), inicio, Keys.PUBLIC_KEY, middleware.md5())
+                    .enqueue(new Callback<Characters>() {
+                        @Override
+                        public void onResponse(Call<Characters> call, Response<Characters> response) {
+                            if (response.body() != null) {
+
+                                Characters c = response.body();
+
+
+                                if (Integer.parseInt(c.getData().getTotal()) > 0) {
+                                    if (page == 0) {
+                                        TOTAL_PAGES = (int) (Math.floor(Integer.parseInt(c.getData().getTotal()) / PAGE_SIZE));
+                                        if (Integer.parseInt(c.getData().getTotal()) % PAGE_SIZE != 0) {
+                                            TOTAL_PAGES++;
+                                        }
+                                    }
+
+                                    adapter.addAll((ArrayList<Result>) c.getData().getResults());
+                                    adapter.removeLoadingFooter();
+                                    isLoading = false;
+
+                                    if (currentPage + 1 < TOTAL_PAGES) {
+                                        adapter.addLoadingFooter();
+                                    } else {
+                                        isLastPage = true;
+                                    }
+
+                                }
+                            } else {
+                                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Characters> call, Throwable t) {
+                            Toast.makeText(MainActivity.this, "No hay internet", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (IOError e){
+            e.printStackTrace();
+            Toast.makeText(activity, "No hay datos", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

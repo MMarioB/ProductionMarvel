@@ -15,7 +15,7 @@ public class Data {
     @SerializedName("results")
     private List<Result> mResults;
     @SerializedName("total")
-    private Long mTotal;
+    private String mTotal;
 
     public String getCount() {
         return mCount;
@@ -49,11 +49,11 @@ public class Data {
         mResults = results;
     }
 
-    public Long getTotal() {
+    public String getTotal() {
         return mTotal;
     }
 
-    public void setTotal(Long total) {
+    public void setTotal(String total) {
         mTotal = total;
     }
 

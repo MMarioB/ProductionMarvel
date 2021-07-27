@@ -11,7 +11,7 @@ public class Characters {
     @SerializedName("attributionText")
     private String mAttributionText;
     @SerializedName("code")
-    private Long mCode;
+    private String mCode;
     @SerializedName("copyright")
     private String mCopyright;
     @SerializedName("data")
@@ -37,11 +37,11 @@ public class Characters {
         mAttributionText = attributionText;
     }
 
-    public Long getCode() {
+    public String getCode() {
         return mCode;
     }
 
-    public void setCode(Long code) {
+    public void setCode(String code) {
         mCode = code;
     }
 
