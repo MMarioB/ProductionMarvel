@@ -20,7 +20,6 @@ public class PersonajesAdapter extends RecyclerView.Adapter<PersonajesAdapter.Pe
 
     private Activity activity;
     private List<Personaje> listado;
-    private String id;
 
     public PersonajesAdapter(Activity activity, List<Personaje> listado) {
 
@@ -41,15 +40,7 @@ public class PersonajesAdapter extends RecyclerView.Adapter<PersonajesAdapter.Pe
     public void onBindViewHolder(PersonajeViewHolder holder, int position) {
 
         Personaje p = listado.get(position);
-        holder.nombre.setText(p.getNome());
-        holder.id.setText(p.getId());
-        holder.url.setText(p.getUrl());
-        holder.descripcion.setText(p.getDescription());
-
-        Glide.with(activity)
-                .load(p.getUrl())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.img);
+        holder.vincula(p);
 
     }
 
@@ -78,6 +69,25 @@ public class PersonajesAdapter extends RecyclerView.Adapter<PersonajesAdapter.Pe
 
 
         }
+
+        public void vincula(Personaje p) {
+            fillFields(p);
+
+        }
+
+        public void fillFields(Personaje p) {
+            nombre.setText(p.getNombre());
+            id.setText(p.getId());
+            url.setText(p.getUrl());
+            descripcion.setText(p.getDescription());
+
+            Glide.with(activity)
+                    .load(p.getUrl())
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(img);
+        }
     }
+
+
 
 }

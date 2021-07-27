@@ -3,13 +3,13 @@ package com.example.personajesmarvel.models;
 public class Personaje {
 
     private String id;
-    private String nome;
+    private String nombre;
     private String url;
     private String description;
 
-    public Personaje(String id, String nome, String url, String resultDescription){
+    public Personaje(String id, String nombre, String url, String resultDescription){
         this.id = id;
-        this.nome = nome;
+        this.nombre = nombre;
         this.url = url;
         this.description = resultDescription;
     }
@@ -30,12 +30,12 @@ public class Personaje {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDescription() {

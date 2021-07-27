@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 listado.add(p);
 
+                                System.out.println(url);
 
                             }
 
@@ -102,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(activity, "No hay datos", Toast.LENGTH_SHORT).show();
                             }
                         }
-
-
 
                         @Override
                         public void onFailure(Call<Characters> call, Throwable t) {
