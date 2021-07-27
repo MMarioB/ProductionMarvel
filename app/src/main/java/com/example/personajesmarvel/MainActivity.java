@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rvLista;
+    private Button filtrobtn;
     private Middleware middleware;
     private long inicio = 0;
 
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage = PAGE_START;
 
     RecyclerViewAdapter adapter;
+    String campo_busqueda;
+    EditText filtro;
     LinearLayoutManager llm;
     List<Personaje> listado;
     Activity activity;
@@ -63,13 +67,27 @@ public class MainActivity extends AppCompatActivity {
         rvLista = findViewById(R.id.lista);
         activity = MainActivity.this;
         middleware = new Middleware();
+        filtro = findViewById(R.id.et_texto_filtro);
+        filtrobtn = findViewById(R.id.btn_filtro);
 
         RelativeLayout item = findViewById(R.id.rl_layout);
         final View view = getLayoutInflater().inflate(R.layout.activity_main, null);
         item.addView(view);
 
         traerDatos(view);
+
+
+
+
+        filtrobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                campo_busqueda = filtro.getText().toString();
+                Toast.makeText(MainActivity.this,campo_busqueda,Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
 
     private void traerDatos(final View view) {
         try {
@@ -152,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   private void cargarDatos(View view, final int page) {
+    private void cargarDatos(View view, final int page) {
 
         try {
             RetrofitInstance
@@ -197,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "No hay internet", Toast.LENGTH_SHORT).show();
                         }
                     });
-        } catch (IOError e){
+        } catch (IOError e) {
             e.printStackTrace();
             Toast.makeText(activity, "No hay datos", Toast.LENGTH_SHORT).show();
         }
