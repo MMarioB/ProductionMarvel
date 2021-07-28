@@ -2,16 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".PersonajeAmpliado">
+
+    <TextView
+        android:id="@+id/heroeN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/heebo_thin"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        tools:text="Personaje" />
+
+    <ImageView
+        android:id="@+id/heroeImg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:src="@mipmap/ic_launcher_round" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,100 +39,23 @@
             android:orientation="vertical">
 
 
-            <Button
-                android:id="@+id/btnReload"
+
+            <TextView
+                android:id="@+id/series"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tvHero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/heebo_thin"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                tools:text="Personaje" />
-
-            <ImageView
-                android:id="@+id/imgHero"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:src="@mipmap/ic_launcher_round" />
-
-            <TextView
-                android:id="@+id/tvComics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/heebo_thin"
-                android:text="Comics"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/detailsCLoading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerComics"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/tvSeries"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="42dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/heebo_thin"
+                android:layout_margin="10dp"
                 android:text="Series"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/detailsSLoading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerSeries"
+                android:id="@+id/listaSeries"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+                android:layout_height="match_parent"
+                android:layout_margin="10dp" />
         </LinearLayout>
-
-
     </ScrollView>
 
 

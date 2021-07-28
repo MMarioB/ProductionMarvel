@@ -21,14 +21,14 @@ import java.util.List;
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder> {
 
     private Activity activity;
-    private List<String> seriesList;
+    private List<String> listaSeries;
     private SharedPreferences sharedPreferences;
     private String id;
 
-    public SeriesAdapter(Activity activity, List<String> seriesList) {
+    public SeriesAdapter(Activity activity, List<String> listaSeries) {
 
         this.activity = activity;
-        this.seriesList = seriesList;
+        this.listaSeries = listaSeries;
     }
 
 
@@ -37,8 +37,8 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_serie, parent, false);
 
-       sharedPreferences = activity.getSharedPreferences("info_heroe", Context.MODE_PRIVATE);
-        id = sharedPreferences.getString("id",null);
+        sharedPreferences = activity.getSharedPreferences("info_heroe", Context.MODE_PRIVATE);
+        id = sharedPreferences.getString("id", null);
 
         return new SeriesViewHolder(view);
     }
@@ -46,18 +46,20 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
     @Override
     public void onBindViewHolder(SeriesViewHolder holder, int position) {
 
-        String series = seriesList.get(position);
-        holder.vincula(series);
+        String series = listaSeries.get(position);
+        Picasso.with(activity)
+                .load(series)
+                .into(holder.image_series);
 
     }
 
     @Override
     public int getItemCount() {
-        return seriesList.size();
+        return listaSeries.size();
     }
 
 
-    public class SeriesViewHolder extends RecyclerView.ViewHolder{
+    public class SeriesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image_series;
         TextView tvIdSeries;
@@ -74,18 +76,8 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
 
         }
 
-        public void vincula(String series) {
-            fillFields(series);
 
-        }
-
-        public void fillFields(String series) {
-
-                Picasso.with(activity)
-                        .load(series)
-                        .into(image_series);
-
-        }
     }
-
 }
+
+

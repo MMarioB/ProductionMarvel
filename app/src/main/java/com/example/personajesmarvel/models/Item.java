@@ -36,4 +36,12 @@ public class Item {
         mType = type;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "mName='" + mName + '\'' +
+                ", mResourceURI='" + mResourceURI + '\'' +
+                ", mType='" + mType + '\'' +
+                '}';
+    }
 }

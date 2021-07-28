@@ -117,4 +117,20 @@ public class Result {
         mUrls = urls;
     }
 
+    @Override
+    public String toString() {
+        return "Result{" +
+                "mComics=" + mComics +
+                ", mDescription='" + mDescription + '\'' +
+                ", mEvents=" + mEvents +
+                ", mId='" + mId + '\'' +
+                ", mModified='" + mModified + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mResourceURI='" + mResourceURI + '\'' +
+                ", mSeries=" + mSeries +
+                ", mStories=" + mStories +
+                ", mThumbnail=" + mThumbnail +
+                ", mUrls=" + mUrls +
+                '}';
+    }
 }

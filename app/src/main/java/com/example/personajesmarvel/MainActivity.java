@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager llm;
     List<Personaje> listado;
     Activity activity;
-    Context context = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,11 +112,6 @@ public class MainActivity extends AppCompatActivity {
                                         currentPage += 1;
                                         inicio += 20;
                                         cargarDatos(view, currentPage);
-                                    }
-
-                                    @Override
-                                    public int getTotalPageCount() {
-                                        return TOTAL_PAGES;
                                     }
 
                                     @Override

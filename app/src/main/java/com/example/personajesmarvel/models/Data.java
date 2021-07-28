@@ -57,4 +57,14 @@ public class Data {
         mTotal = total;
     }
 
+    @Override
+    public String toString() {
+        return "Data{" +
+                "mCount='" + mCount + '\'' +
+                ", mLimit=" + mLimit +
+                ", mOffset=" + mOffset +
+                ", mResults=" + mResults +
+                ", mTotal='" + mTotal + '\'' +
+                '}';
+    }
 }

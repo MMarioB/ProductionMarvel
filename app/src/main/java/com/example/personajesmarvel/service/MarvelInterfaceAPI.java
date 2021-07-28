@@ -17,13 +17,6 @@ public interface MarvelInterfaceAPI {
             @Query("apikey") String key,
             @Query("hash") String hashMd5);
 
-    @GET("comics?")
-    Call<Characters> getComics(
-            @Query("ts") long timestamp,
-            @Query("limit") long limit,
-            @Query("apikey") String key,
-            @Query("hash") String hashMd5);
-
     @GET("series?")
     Call<Characters> getSeries(
             @Query("ts") long timestamp,

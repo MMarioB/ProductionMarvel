@@ -38,12 +38,6 @@ public class Middleware {
 
         String md5 = new BigInteger(1, m.digest()).toString(16);
 
-        System.out.println("TIMESTAMP: " + date + " MD5: " + md5);
-
         return md5;
-    }
-
-    public String url() {
-        return "http://gateway.marvel.com/v1/public/characters?ts=" + timestamp() + "&apikey=" + Keys.PUBLIC_KEY + "&hash=" + md5();
     }
 }
