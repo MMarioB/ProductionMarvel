@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         final View view = getLayoutInflater().inflate(R.layout.activity_main, null);
         item.addView(view);
 
-        traerDatos(view);
+        traerDatos();
     }
 
 
-    private void traerDatos(final View view) {
+    private void traerDatos() {
         try {
             RetrofitInstance
                     .listaPersonajes()
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-
                             if (listado.size() != 0) {
                                 adapter = new RecyclerViewAdapter(activity);
                                 llm = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                                         isLoading = true;
                                         currentPage += 1;
                                         inicio += 20;
-                                        cargarDatos(view, currentPage);
+                                        cargarDatos(currentPage);
                                     }
 
                                     @Override
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                cargarDatos(view, currentPage);
+                                cargarDatos(currentPage);
 
 
                             } else {
@@ -144,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void cargarDatos(View view, final int page) {
+    private void cargarDatos(final int page) {
 
         try {
             RetrofitInstance
