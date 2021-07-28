@@ -6,16 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.personajesmarvel.adapter.PersonajesAdapter;
 import com.example.personajesmarvel.adapter.RecyclerViewAdapter;
 import com.example.personajesmarvel.env.Keys;
 import com.example.personajesmarvel.models.Characters;
@@ -23,20 +21,16 @@ import com.example.personajesmarvel.models.Personaje;
 import com.example.personajesmarvel.models.Result;
 import com.example.personajesmarvel.service.MarvelInterfaceAPI;
 import com.example.personajesmarvel.service.Middleware;
-import com.example.personajesmarvel.service.PaginationScrollListener;
+import com.example.personajesmarvel.service.LoadScrollService;
 import com.example.personajesmarvel.service.RetrofitInstance;
 
 import java.io.IOError;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isLoading = false;
     private boolean isLastPage = false;
     private int TOTAL_PAGES = 0;
-    private int PAGE_SIZE = 10;
+    private int PAGE_SIZE = 1;
     private int currentPage = PAGE_START;
 
     RecyclerViewAdapter adapter;
@@ -126,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
                                 rvLista.setLayoutManager(llm);
                                 rvLista.setAdapter(adapter);
 
-                                rvLista.addOnScrollListener(new PaginationScrollListener(llm) {
+                                rvLista.addOnScrollListener(new LoadScrollService(llm) {
                                     @Override
-                                    protected void loadMoreItems() {
+                                    protected void nextItems() {
                                         isLoading = true;
                                         currentPage += 1;
                                         inicio += 20;

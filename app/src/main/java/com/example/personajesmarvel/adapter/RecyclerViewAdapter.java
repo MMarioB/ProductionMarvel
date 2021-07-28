@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +20,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.personajesmarvel.R;
 import com.example.personajesmarvel.models.Personaje;
 import com.example.personajesmarvel.models.Result;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity activity;
@@ -98,19 +104,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if (result.getId() != null && result.getName() != null && result.getThumbnail() != null ){
                     final loadVH loadVH = (loadVH) holder;
 
+                    Random rd = new Random(); // creating Random object
+                    float rating = rd.nextFloat() * (5 - 1) + 1;
+
                     loadVH.tId.setText(p.getId());
                     loadVH.tName.setText(p.getNombre());
                     loadVH.tUrl.setText(p.getUrl());
                     loadVH.tDescrip.setText(p.getDescription());
+                    loadVH.ratingBar.setRating(rating);
 
-                    Glide.with(activity)
+                    Picasso.with(activity)
                             .load(p.getUrl())
-                            .apply(RequestOptions.centerCropTransform())
                             .into(loadVH.imghero);
 
                     //Card Animation
-                    // holder.card.animation = AnimationUtils.loadAnimation(context,R.anim.card_fade)
-
+                    Animation animation = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.slide);
+                    loadVH.itemView.startAnimation(animation);
                 }
 
                 break;
@@ -189,6 +198,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tUrl;
         TextView tDescrip;
         ImageView imghero;
+        RatingBar ratingBar;
 
         public loadVH(View view) {
             super(view);
@@ -198,6 +208,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tUrl = itemView.findViewById(R.id.heroe_url);
             tDescrip = itemView.findViewById(R.id.heroe_description);
             imghero = itemView.findViewById(R.id.heroe_image);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

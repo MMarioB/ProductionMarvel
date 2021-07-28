@@ -4,11 +4,11 @@ package com.example.personajesmarvel.service;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public abstract class PaginationScrollListener extends RecyclerView.OnScrollListener {
+public abstract class LoadScrollService extends RecyclerView.OnScrollListener {
 
     LinearLayoutManager layoutManager;
 
-    public PaginationScrollListener(LinearLayoutManager layoutManager) {
+    public LoadScrollService(LinearLayoutManager layoutManager) {
         this.layoutManager = layoutManager;
     }
 
@@ -23,12 +23,12 @@ public abstract class PaginationScrollListener extends RecyclerView.OnScrollList
         if (!isLoading() && !isLastPage()) {
             if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                     && firstVisibleItemPosition >= 0) {
-                loadMoreItems();
+                nextItems();
             }
         }
     }
 
-    protected abstract void loadMoreItems();
+    protected abstract void nextItems();
 
     public abstract int getTotalPageCount();
 
