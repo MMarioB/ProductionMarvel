@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RatingBar;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.personajesmarvel.adapter.RecyclerViewAdapter;
@@ -35,7 +33,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rvLista;
-    private Button filtrobtn;
     private Middleware middleware;
     private long inicio = 0;
 
@@ -47,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage = PAGE_START;
 
     RecyclerViewAdapter adapter;
-    String campo_busqueda;
-    EditText filtro;
+    SharedPreferences sharedPreferences;
     LinearLayoutManager llm;
     List<Personaje> listado;
     Activity activity;
@@ -61,25 +57,12 @@ public class MainActivity extends AppCompatActivity {
         rvLista = findViewById(R.id.lista);
         activity = MainActivity.this;
         middleware = new Middleware();
-        filtro = findViewById(R.id.et_texto_filtro);
-        filtrobtn = findViewById(R.id.btn_filtro);
 
-        RelativeLayout item = findViewById(R.id.rl_layout);
+        LinearLayout item = findViewById(R.id.ll_layout);
         final View view = getLayoutInflater().inflate(R.layout.activity_main, null);
         item.addView(view);
 
         traerDatos(view);
-
-
-
-
-        filtrobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                campo_busqueda = filtro.getText().toString();
-                Toast.makeText(MainActivity.this,campo_busqueda,Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
 
@@ -108,8 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
                                 listado.add(p);
 
-                                System.out.println(url);
-                                System.out.println(i + "----" + descrip.length());
+                                sharedPreferences = MainActivity.this.activity.getSharedPreferences("info_heroe", Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putString("id", id).apply();
+                                sharedPreferences.edit().putString("nombre", nom).apply();
+                                sharedPreferences.edit().putString("url", url).apply();
+                                sharedPreferences.edit().putString("descripcion", descrip).apply();
 
                             }
 
@@ -214,6 +200,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(activity, "No hay datos", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }

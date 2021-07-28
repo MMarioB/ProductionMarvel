@@ -2,56 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/rl_layout"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Héroes"
+        android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="18dp"
-            android:text="Héroes"
-            android:textColor="@android:color/black"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            />
-
-        <EditText
-            android:id="@+id/et_texto_filtro"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/custom_edit_text_filtro"
-            android:hint="@string/buscar"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp" />
-
-        <Button
-            android:id="@+id/btn_filtro"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="290dp"
-            android:layout_marginTop="16dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableRight="@android:drawable/ic_menu_search"
-            android:drawableTint="@color/black"/>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lista"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="60dp" />
-
-    </RelativeLayout>
 
 </LinearLayout>

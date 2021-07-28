@@ -11,9 +11,6 @@ import retrofit2.http.Query;
 
 public interface MarvelInterfaceAPI {
     @GET("characters?")
-    Call<List<Characters>> lista();
-
-    @GET("characters?")
     Call<Characters> lista(
             @Query("ts") long timestamp,
             @Query("offset") long offset,

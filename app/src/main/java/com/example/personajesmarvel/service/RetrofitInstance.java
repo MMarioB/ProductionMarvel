@@ -22,7 +22,7 @@ public class RetrofitInstance {
                 .build();
     }
 
-    public static Retrofit getGsonSeries(String id) {
+    public static Retrofit listaSeries(String id) {
         final OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(1000, TimeUnit.SECONDS)
                 .connectTimeout(1000, TimeUnit.SECONDS)
@@ -37,7 +37,7 @@ public class RetrofitInstance {
                 .build();
     }
 
-    public static Retrofit getGsonComics(String id) {
+    public static Retrofit listaComics(String id) {
         final OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(1000, TimeUnit.SECONDS)
                 .connectTimeout(1000, TimeUnit.SECONDS)

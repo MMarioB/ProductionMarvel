@@ -45,4 +45,14 @@ public class Personaje {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Personaje{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

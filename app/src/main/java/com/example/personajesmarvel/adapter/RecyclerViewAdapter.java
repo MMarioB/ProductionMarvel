@@ -1,12 +1,15 @@
 package com.example.personajesmarvel.adapter;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -15,14 +18,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.example.personajesmarvel.PersonajeAmpliado;
 import com.example.personajesmarvel.R;
 import com.example.personajesmarvel.models.Personaje;
 import com.example.personajesmarvel.models.Result;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -30,6 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private Activity activity;
     private List<Result> resultList;
+    private List<Personaje> personajeList;
     private SharedPreferences sharedPreferences;
     private String id;
 
@@ -39,9 +43,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     public RecyclerViewAdapter(Activity activity) {
-
         this.activity = activity;
         resultList = new ArrayList<>();
+    }
+    public RecyclerViewAdapter(List<Personaje> mData, Activity mContext) {
+        this.personajeList = mData;
+        this.activity = mContext;
     }
 
     @Override
@@ -219,12 +226,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     if (resultList.get(position).getId() == tId.getText().toString()){
                         Toast.makeText(activity, tName.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                       /* Intent goDetails = new Intent(activity, DetailsActivity.class);
+                        Intent goDetails = new Intent(activity, PersonajeAmpliado.class);
                         goDetails.putExtra("id", tId.getText().toString());
                         goDetails.putExtra("url", tUrl.getText().toString());
-                        goDetails.putExtra("name", tName.getText().toString());
-                        goDetails.putExtra("description", tDescrip.getText().toString());
-                        activity.startActivity(goDetails);*/
+                        goDetails.putExtra("nombre", tName.getText().toString());
+                        goDetails.putExtra("desc", tDescrip.getText().toString());
+                        activity.startActivity(goDetails);
 
                     }
 
@@ -240,5 +247,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
         }
     }
+
+
 
 }
